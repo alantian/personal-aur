@@ -110,6 +110,7 @@ build() {
   ./configure \
     --prefix=/usr \
     --disable-debug \
+    --disable-vulkan `# see AUR comment <https://aur.archlinux.org/packages/ffmpeg-compat-59#comment-906400>` \
     --disable-static \
     --disable-stripping \
     --enable-amf \
@@ -173,4 +174,5 @@ package() {
   make DESTDIR="${pkgdir}" install-libs
   cd "${pkgdir}/usr/lib"
   rm -f *.so
+  rm -f libswresample.so.4* # conflict with `ffmpeg 2:6.0-3`
 }
